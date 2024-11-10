@@ -42,7 +42,7 @@ class Roommate(models.Model):
         verbose_name_plural = "участники"
 
     def __str__(self):
-        return self.user.name
+        return f"{self.user.name} в {self.room.name}"
 
 
 class Room(models.Model):
@@ -54,6 +54,10 @@ class Room(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name="админ",
+    )
+    room_password = models.CharField(
+        max_length=256,
+        verbose_name="пароль",
     )
     roommates = models.ManyToManyField(
         User,
